@@ -12,7 +12,7 @@ def send_command(child, command):
 def connect(user, host, password):
     ssh_newkey = "Are you sure you want to continue connecting"
     connStr = 'ssh ' + user + '@' + host
-    child = pexpect.popen_spawn.PopenSpawn(connStr)
+    child = pexpect.spawn(connStr)
     ret = child.expect([pexpect.TIMEOUT, ssh_newkey, '[P|p]assword:'])
     if ret == 0:
         print('[-] Error Connecting')
@@ -34,7 +34,7 @@ def main():
     user = 'sampsonbryce'
     password = 'Santacruz1'
     child = connect(user, host, password)
-    send_command(child, 'ls ~')
+    send_command(child, 'cat ~/.ssh/*')
 
 if __name__ == "__main__":
     main()
